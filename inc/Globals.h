@@ -49,6 +49,7 @@
 #define PROTOCOL_START(X) X ## _start
 #define PROTOCOL_BIT0(X) X ## _bit0
 #define PROTOCOL_BIT1(X) X ## _bit1
+#define PROTOCOL_END(X) X ## _end
 
 // USER PROTOTYPES
 SI_SBIT(LED, SFR_P1, 0);		// LED

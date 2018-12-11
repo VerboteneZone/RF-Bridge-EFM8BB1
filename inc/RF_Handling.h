@@ -19,6 +19,7 @@ extern void SendBuckets(
 		uint8_t start[], uint8_t start_size,
 		uint8_t bit0[], uint8_t bit0_size,
 		uint8_t bit1[], uint8_t bit1_size,
+		uint8_t end[], uint8_t end_size,
 		uint8_t bit_count,
 		bool inverse,
 		SI_VARIABLE_SEGMENT_POINTER(rfdata, uint8_t, SI_SEG_XDATA));

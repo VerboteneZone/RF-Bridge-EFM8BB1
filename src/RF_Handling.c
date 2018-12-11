@@ -492,6 +492,7 @@ void SendBuckets(
 		uint8_t start[], uint8_t start_size,
 		uint8_t bit0[], uint8_t bit0_size,
 		uint8_t bit1[], uint8_t bit1_size,
+		uint8_t end[], uint8_t end_size,
 		uint8_t bit_count,
 		bool inverse,
 		SI_VARIABLE_SEGMENT_POINTER(rfdata, uint8_t, SI_SEG_XDATA))
@@ -539,6 +540,13 @@ void SendBuckets(
 		}
 	}
 
+	// transmit end bucket(s)
+	for (i = 0; i < end_size; i++)
+		if (end[i] < pulses_size)
+			high_low = SendSingleBucket(high_low, pulses[end[i]]);
+		else
+			high_low = !high_low;
+
 	LED = LED_OFF;
 
 	rf_state = RF_FINISHED;
@@ -551,6 +559,7 @@ void SendBucketsByIndex(uint8_t index, SI_VARIABLE_SEGMENT_POINTER(rfdata, uint8
 			PROTOCOL_DATA[index].start.dat, PROTOCOL_DATA[index].start.size,
 			PROTOCOL_DATA[index].bit0.dat, PROTOCOL_DATA[index].bit0.size,
 			PROTOCOL_DATA[index].bit1.dat, PROTOCOL_DATA[index].bit1.size,
+			PROTOCOL_DATA[index].end.dat, PROTOCOL_DATA[index].end.size,
 			PROTOCOL_DATA[index].bit_count,
 			PROTOCOL_DATA[index].inverse,
 			rfdata
